@@ -1,0 +1,36 @@
+.article {
+    width: 45%;
+    margin: 0px 25px 40px 25px;
+}
+
+.article-photo {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.article-content {
+    text-align: center;
+}
+
+.article-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 35px;
+}
+
+.article-date {
+    font-style: italic;
+    font-size: 15px;
+    color: #999;
+}
+
+.article-description {
+    font-family: 'Varela Round', sans-serif;
+    text-align: justify;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}

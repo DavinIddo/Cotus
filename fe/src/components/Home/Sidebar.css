@@ -1,0 +1,44 @@
+.sidebar {
+    flex: 3;
+    margin: 20px;
+    background-color: #fdfbfb;
+    border-radius: 10px;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.sidebar-contact {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.sidebar-contact-link {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.profile-about {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    font-family: 'Nunito', sans-serif;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 80%;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.profile-description {
+    margin-left: 10px;
+    margin-right: 10px;
+}
