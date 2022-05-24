@@ -17,10 +17,10 @@ function Sidebar() {
             <div className='sidebar-item'>
                 <span className='profile-about'>Contact Me</span>
                 <div className='sidebar-contact'>
-                    <i class="fa-brands fa-facebook-square fa-2xl sidebar-contact-link"></i>
-                    <i class="fa-brands fa-twitter-square fa-2xl sidebar-contact-link"></i>
-                    <i class="fa-brands fa-instagram-square fa-2xl sidebar-contact-link"></i>
-                    <i class="fa-brands fa-linkedin fa-2xl sidebar-contact-link"></i>
+                    <i className="fa-brands fa-facebook-square fa-2xl sidebar-contact-link"></i>
+                    <i className="fa-brands fa-twitter-square fa-2xl sidebar-contact-link"></i>
+                    <i className="fa-brands fa-instagram-square fa-2xl sidebar-contact-link"></i>
+                    <i className="fa-brands fa-linkedin fa-2xl sidebar-contact-link"></i>
                 </div>
             </div>
         </div>
