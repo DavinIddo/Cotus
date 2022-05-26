@@ -6,18 +6,21 @@
 .header-title-top {
     position: absolute;
     font-size: 70px;
-    top: 5%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0);
-    color: white;
+    /* color: rgb(121, 18, 161); */
+    color: black;
     font-family: 'Ultra', serif;
-    border-bottom: 10px solid;
+    border-bottom: 5px solid;
 }
 
 .header-title-bottom {
+    /* background-color: rgb(27, 150, 190); */
+    color: white;
     position: absolute;
     font-size: 40px;
-    top: 20%;
+    top: 8%;
     left: 50%;
     transform: translate(-50%, 0);
     font-family: 'Courgette', cursive;
@@ -25,6 +28,7 @@
 
 .header-image {
     width: 100%;
-    height: 20%;
-    object-fit: cover;
+    height: 500px;
+    object-fit: cover;  
+    object-position: 0% 20%;
 }
