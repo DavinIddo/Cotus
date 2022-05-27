@@ -16,7 +16,7 @@ function Profile() {
                         </img>
 
                         <label htmlFor='profile-input' >
-                            <i className="profile-file fa-solid fa-circle-user"></i>
+                            <i className="profile-file fa-solid fa-image"></i>
                         </label>
                         <input className='write-file-hidden' id='profile-input' type='file' accept="image/png, image/jpeg" hidden />
                     </div>

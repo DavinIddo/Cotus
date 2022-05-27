@@ -1,6 +1,6 @@
 .login {
     background-color: #252f44;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
