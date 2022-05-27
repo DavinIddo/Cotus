@@ -11,10 +11,31 @@
 
 .navbar-left, .navbar-right {
     flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-center {
     flex: 6;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-user {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 50%;
+    color: cadetblue;
 }
 
 .list-items {
@@ -26,7 +47,7 @@
 }
 
 .item-center {
-    margin-right: 5%;
+    margin: 0 3%;
     font-size: 25px;
     font-weight: 500;
     cursor: pointer;

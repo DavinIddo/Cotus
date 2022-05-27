@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css'
 
-function Navbar() {
+function Navbar({ user, handleLogout }) {
     return (
         <div className='navbar'>
             <div className='navbar-left'>
@@ -9,18 +10,37 @@ function Navbar() {
             </div>
             <div className='navbar-center'>
                 <ul className='list-items'>
-                    <li className='item-center'>HOME</li>
-                    <li className='item-center'>ABOUT</li>
-                    <li className='item-center'>CONTACT</li>
-                    <li className='item-center'>WRITE</li>
-                    <li className='item-center'>LOGOUT</li>
+                    <li className='item-center'>
+                        <Link className='navbar-link' to='/'>HOME</Link>
+                    </li>
+                    <li className='item-center'>
+                        <Link className='navbar-link' to='/'>ABOUT</Link>
+                    </li>
+                    <li className='item-center'>
+                        <Link className='navbar-link' to='/'>CONTACT</Link>
+                    </li>
+                    <li className='item-center'>
+                        <Link className='navbar-link' to='/write'>WRITE</Link>
+                    </li>
+                    {user &&
+                    <li className='item-center'>
+                        <Link className='navbar-link' to='/login' onClick={() => handleLogout(false)}>LOGOUT</Link>
+                    </li>}
                 </ul>
             </div>
             <div className='navbar-right'>
-                <ul className='list-items'>
-                    <li className='item-right'>Login</li>
-                    <li className='item-right'>Register</li>
-                </ul>
+                {user ? (
+                    <i className="navbar-user fa-solid fa-user-large"></i>
+                ) : (
+                    <ul className='list-items'>
+                        <li className='item-right'>
+                            <Link className='navbar-link' to='/login'>Login</Link>
+                        </li>
+                        <li className='item-right'>
+                            <Link className='navbar-link' to='/register'>Register</Link>
+                        </li>
+                    </ul>
+                )}
             </div>
         </div>
     );
