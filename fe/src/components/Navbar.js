@@ -30,7 +30,9 @@ function Navbar({ user, handleLogout }) {
             </div>
             <div className='navbar-right'>
                 {user ? (
-                    <i className="navbar-user fa-solid fa-user-large"></i>
+                    <Link to='/profile'>
+                        <i className="navbar-user fa-solid fa-user-large"></i>
+                    </Link>
                 ) : (
                     <ul className='list-items'>
                         <li className='item-right'>

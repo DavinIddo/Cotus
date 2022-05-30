@@ -2,7 +2,7 @@ import React from 'react';
 import Sidebar from '../../components/Sidebar'
 import './Profile.css'
 
-function Profile() {
+function Profile({ userData }) {
     return (
         <div className='profile'>
             <div className='profile-main'>
