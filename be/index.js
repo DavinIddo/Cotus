@@ -1,19 +1,23 @@
+const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
-const express = require('express');
+const authRoute = require("./routes/user");
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.get('/api', (req, res) => {
-    console.log("Welcome to api!")
-    res.json({ message: 'Hello World!'})
-})
+dotenv.config();
 
-app.get('/:userId', (req, res) => {
-    res.send(req.params)
-})
+app.use(express.json())
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(console.log("Connected to the MongoDB!"))
+    .catch((err) => console.log(err));
+
+app.use('/api/auth', authRoute);
 
 app.listen(PORT, (req, res) => {
-    console.log(`Server listening on port: ${PORT}`)
-})
+    console.log(`Server listening on port: ${PORT}`);
+});
