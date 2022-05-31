@@ -14,9 +14,10 @@ import {
     Navigate,
 } from "react-router-dom";
 
-function App(props) {
+function App() {
     const [userData, setUserData] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
+    const [errMessage, setErrMessage] = useState("");
 
     // useEffect(() => {
     //     console.log("inside :flushed: useEffect!")
@@ -25,13 +26,45 @@ function App(props) {
     //     .then(result => setData(result.message))
     // }, [])
 
-    function handleLogin(newUserState, newUserData) {
-        setIsLogin(newUserState);
-        setUserData(newUserData);
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        let okStatus;
+        const data = { 
+            username: event.target[0].value, 
+            password: event.target[1].value, 
+        };
+
+        fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                okStatus = response.ok;
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data["message"]);
+                if (okStatus) {
+                    setUserData(data["userData"]);
+                    setIsLogin(true);
+                } else {
+                    setErrMessage(data["message"]);
+                    throw new Error(data["message"]);
+                }
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     function handleLogout(newUserState) {
         setIsLogin(newUserState);
+        setUserData(null);
     }
 
     return (
@@ -48,7 +81,7 @@ function App(props) {
                     />
                     <Route
                         path="/login"
-                        element={isLogin ? <Navigate to="/" /> : <Login />}
+                        element={isLogin ? <Navigate to="/" /> : <Login handleLogin={handleLogin} errMessage={errMessage} />}
                     />
                     <Route
                         path="/register"
