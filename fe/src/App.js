@@ -18,6 +18,7 @@ function App() {
     const [userData, setUserData] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
     const [errMessage, setErrMessage] = useState("");
+    const [succMessage, setSuccMessage] = useState("");
 
     // useEffect(() => {
     //     console.log("inside :flushed: useEffect!")
@@ -26,13 +27,48 @@ function App() {
     //     .then(result => setData(result.message))
     // }, [])
 
+    function handleRegister(event) {
+        event.preventDefault();
+
+        let okStatus;
+        const data = {
+            username: event.target[0].value,
+            email: event.target[1].value,
+            password: event.target[2].value,
+        };
+
+        fetch("/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                okStatus = response.ok;
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data["message"]);
+
+                if (!okStatus) {
+                    setErrMessage(data["message"]);
+                    setSuccMessage('');
+                    throw new Error(data["message"]);
+                }
+
+                setErrMessage("");
+                setSuccMessage(data["message"]);
+            });
+    }
+
     function handleLogin(event) {
         event.preventDefault();
-        
+
         let okStatus;
-        const data = { 
-            username: event.target[0].value, 
-            password: event.target[1].value, 
+        const data = {
+            username: event.target[0].value,
+            password: event.target[1].value,
         };
 
         fetch("/api/auth/login", {
@@ -49,13 +85,13 @@ function App() {
             .then((data) => {
                 console.log(data["message"]);
                 if (okStatus) {
+                    setErrMessage("");
                     setUserData(data["userData"]);
                     setIsLogin(true);
                 } else {
                     setErrMessage(data["message"]);
                     throw new Error(data["message"]);
                 }
-
             })
             .catch((error) => {
                 console.log(error);
@@ -67,30 +103,39 @@ function App() {
         setUserData(null);
     }
 
+    function handleNavbarClick() {
+        setSuccMessage("");
+        setErrMessage("");
+    }
+
     return (
         <div className="App">
             <Router>
-                <Navbar user={isLogin} handleLogout={handleLogout} />
+                <Navbar user={isLogin} handleLogout={handleLogout} handleNavbarClick={handleNavbarClick} />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route
-                        path="/write"
-                        element={
-                            isLogin ? <Write /> : <Navigate to="/register" />
+                    <Route path="/write" element={
+                            isLogin ? <Write /> : <Navigate to="/register" replace />
                         }
                     />
-                    <Route
-                        path="/login"
-                        element={isLogin ? <Navigate to="/" /> : <Login handleLogin={handleLogin} errMessage={errMessage} />}
+                    <Route path="/login" element={
+                        isLogin ? <Navigate to="/" replace /> : 
+                            <Login handleLogin={handleLogin} errMessage={errMessage}/>
+                        }
                     />
-                    <Route
-                        path="/register"
-                        element={isLogin ? <Navigate to="/" /> : <Register />}
+                    <Route path="/register" element={
+                        isLogin ? <Navigate to="/" replace /> : 
+                            <Register 
+                                handleRegister={handleRegister}
+                                errMessage={errMessage}
+                                succMessage={succMessage}
+                            />
+                        }
                     />
                     <Route
                         path="/profile"
                         element={
-                            isLogin ? <Profile userData={userData} /> : <Navigate to="/login" />
+                            isLogin ? <Profile userData={userData} /> : <Navigate to="/login" replace/>
                         }
                     />
                     <Route path="/single/:singleId" element={<Single />} />

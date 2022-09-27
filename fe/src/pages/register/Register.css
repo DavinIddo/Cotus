@@ -45,3 +45,22 @@
     cursor: pointer;
 }
 
+.register-error {
+    font-size: 18px;
+    margin-top: 20px;
+    color: white;
+    border: 0.5px solid red;
+    border-radius: 15px;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 15px;  
+}
+
+.register-success {
+    font-size: 18px;
+    margin-top: 20px;
+    color: white;
+    border: 0.5px solid green;
+    border-radius: 15px;
+    background-color: rgba(0, 128, 0, 0.1);
+    padding: 15px;  
+}

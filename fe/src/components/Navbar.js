@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
 
-function Navbar({ user, handleLogout }) {
+function Navbar({ user, handleLogout, handleNavbarClick }) {
     return (
         <div className='navbar'>
             <div className='navbar-left'>
@@ -35,10 +35,10 @@ function Navbar({ user, handleLogout }) {
                     </Link>
                 ) : (
                     <ul className='list-items'>
-                        <li className='item-right'>
+                        <li className='item-right' onClick={() => handleNavbarClick()}>
                             <Link className='navbar-link' to='/login'>Login</Link>
                         </li>
-                        <li className='item-right'>
+                        <li className='item-right' onClick={() => handleNavbarClick()}>
                             <Link className='navbar-link' to='/register'>Register</Link>
                         </li>
                     </ul>
