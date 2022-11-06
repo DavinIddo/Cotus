@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./Write.css"
 
 function Write(props) {
-    const [game, setGame] = useState("");
+    const [fetchedGames, setFetchedGames] = useState([]);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -11,8 +11,27 @@ function Write(props) {
 
     function handleSearch(event) {
         event.preventDefault();
-        console.log("Game has been searched");
-        console.log(game)
+        console.log(event.target[0].value);
+
+        const data = {
+            game: event.target[0].value
+        };
+
+        fetch('/api/create/fetchGame', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                setFetchedGames(data["queriedGame"])
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
     return (
@@ -22,17 +41,24 @@ function Write(props) {
             </img>
 
             <form className='write-form' onSubmit={(e) => handleSearch(e)}>
-                <input className='write-game-input' type='text' size='50' placeholder='Desired game to be reviewed...' value={game} onChange={(newGame) => setGame(newGame.target.value)} required></input>
+                <input className='write-game-input' type='text' size='50' placeholder='Desired game to be reviewed...' required></input>
                 <button className='write-game-search'>Search</button>
             </form>
 
             <form className='write-form' onSubmit={(e) => handleSubmit(e)}>
                 <div className='write-group'>
-                    <select className='write-game-select' required>
-                        <option value="" selected disabled hidden>-- list of searched games --</option>
-                        <option value="Elden Ring">Elden Ring</option>
-                        <option value="Elden Ring DLC">Elden Ring DLC</option>
-                    </select>
+                    {fetchedGames.length ? 
+                            <select className='write-game-select' required>
+                                <option value="" selected disabled hidden>-- list of searched games --</option>
+                                {fetchedGames.map((game, index) => (
+                                    <option key={index} value={game.appid}>{game.name}</option>
+                                ))}
+                            </select> 
+                        :
+                            <select className='write-game-select' required disabled>
+                                <option value="" selected disabled hidden>-- list of searched games --</option>
+                            </select>
+                    }
                 </div>
 
                 <div className='write-group'>
