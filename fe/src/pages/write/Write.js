@@ -47,7 +47,7 @@ function Write(props) {
 
             <form className='write-form' onSubmit={(e) => handleSubmit(e)}>
                 <div className='write-group'>
-                    {fetchedGames.length ? 
+                    {/* {fetchedGames.length ? 
                             <select className='write-game-select' required>
                                 <option value="" selected disabled hidden>-- list of searched games --</option>
                                 {fetchedGames.map((game, index) => (
@@ -58,7 +58,14 @@ function Write(props) {
                             <select className='write-game-select' required disabled>
                                 <option value="" selected disabled hidden>-- list of searched games --</option>
                             </select>
-                    }
+                    } */}
+
+                    <select className={fetchedGames.length ? 'write-game-select' : 'write-game-select select-disabled'} required>
+                        <option value="" selected hidden>-- list of searched games --</option>
+                        {fetchedGames.map((game, index) => (
+                            <option key={index} value={game.appid}>{game.name}</option>
+                        ))}
+                    </select> 
                 </div>
 
                 <div className='write-group'>
