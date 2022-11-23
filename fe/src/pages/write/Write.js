@@ -7,6 +7,31 @@ function Write(props) {
     function handleSubmit(event) {
         event.preventDefault();
         console.log("Form has been submitted!");
+
+        const data = {
+            gameId: event.target[0].value,
+            reviewImage: event.target[1].value,
+            reviewTitle: event.target[2].value,
+            reviewContent: event.target[3].value
+        }
+
+        console.log(data)
+
+        fetch('/api/create/checkGame', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
     function handleSearch(event) {

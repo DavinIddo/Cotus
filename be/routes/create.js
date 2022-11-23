@@ -4,28 +4,61 @@ const router = express.Router();
 
 // FETCH GAME
 router.post("/fetchGame", async (req, res) => {
-    try {
-        const query = req.body.game; 
-        console.log("The game that was sent to the BE is:", query)
-        // const allGames = await axios.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
+    const query = req.body.game;
+    console.log("The game that was sent to the BE is:", query);
+    // const allGames = await axios.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
 
-        axios.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
-        .then(response => {
-            const allGames = response["data"]["applist"]["apps"]
-            const games = allGames.filter(game => game.name.toLowerCase().includes(query.toLowerCase()));
+    axios
+        .get(
+            "http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json"
+        )
+        .then((response) => {
+            const allGames = response["data"]["applist"]["apps"];
+            const games = allGames.filter((game) =>
+                game.name.toLowerCase().includes(query.toLowerCase())
+            );
 
-            games.sort((a, b) => (a.name.length > b.name.length) ? 1 : -1)
+            games.sort((a, b) => (a.name.length > b.name.length ? 1 : -1));
 
-            res.status(200).json({ message: "User successfully registered!", queriedGame: games });
+            res.status(200).json({
+                message: "User successfully registered!",
+                queriedGame: games,
+            });
         })
-        .catch(error => {
-            console.log(error)
+        .catch((error) => {
+            console.log(error);
+        });
+});
+
+// CHECK GAME
+router.post("/checkGame", async (req, res) => {
+    const query = req.body;
+    // console.log("The user review:", query)
+
+    axios
+        .get("https://store.steampowered.com/api/appdetails", {
+            params: {
+                appids: query.gameId,
+            },
         })
+        .then((response) => {
+            const gameInfo = response["data"][query.gameId];
 
-    } catch (error) {
-        res.status(500).json(error);
-    }
+            if (gameInfo.success) {
+                const gameType = gameInfo["data"]["type"];
 
+                if (gameType == "game" || gameType == "dlc") {
+                    res.status(200).json({ gameType: gameType });
+                }
+
+                res.status(400).json({ message: "Selection must be a game" });
+            }
+
+            res.status(400).json({ message: "Invalid game option" });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 });
 
 module.exports = router;
