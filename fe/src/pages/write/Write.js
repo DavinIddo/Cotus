@@ -3,6 +3,7 @@ import "./Write.css"
 
 function Write(props) {
     const [fetchedGames, setFetchedGames] = useState([]);
+    const [errMessage, setErrMessage] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -26,6 +27,9 @@ function Write(props) {
         })
             .then(response => response.json())
             .then(data => {
+                if (data["message"]) setErrMessage(data["message"])
+                else setErrMessage("")
+
                 console.log(data)
             })
             .catch(error => {
@@ -90,7 +94,8 @@ function Write(props) {
                         {fetchedGames.map((game, index) => (
                             <option key={index} value={game.appid}>{game.name}</option>
                         ))}
-                    </select> 
+                    </select>
+                    {errMessage && <p className='write-game-error'>{errMessage}</p>}
                 </div>
 
                 <div className='write-group'>

@@ -12,6 +12,7 @@
 
 .write-group {
     position: relative;
+    display: flex;
 }
 
 .last-group {
@@ -58,6 +59,16 @@
 
 .select-disabled {
     color: grey;
+}
+
+.write-game-error {
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    width: 20em;
+    font-size: 20px;
+    color: red;
+    margin-left: 20px;
 }
 
 .write-title {
