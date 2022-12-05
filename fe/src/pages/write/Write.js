@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Write.css"
 
-function Write(props) {
+function Write({ userData }) {
     const [fetchedGames, setFetchedGames] = useState([]);
     const [errMessage, setErrMessage] = useState("");
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ function Write(props) {
         console.log("Form has been submitted!");
 
         const data = {
+            author: userData.username,
             gameId: event.target[0].value,
             reviewImage: event.target[1].value,
             reviewTitle: event.target[2].value,
@@ -33,7 +34,7 @@ function Write(props) {
                 if (data["message"]) setErrMessage(data["message"])
                 else {
                     setErrMessage("")
-                    // navigate("/");
+                    navigate("/");
                 }
 
                 console.log(data)
@@ -121,7 +122,7 @@ function Write(props) {
                 <div className='write-group'>
                     <span className='write-recommendation'>Do you recommend this game?</span>
 
-                    <input type='radio' id='yesChoice' name='recommended' value='yes' className='write-recommendation-choice' />
+                    <input type='radio' id='yesChoice' name='recommended' value='yes' className='write-recommendation-choice' required />
                     <label for='yesChoice'>Yes</label>
 
                     <input type='radio' id='noChoice' name='recommended' value='no' className='write-recommendation-choice' />
