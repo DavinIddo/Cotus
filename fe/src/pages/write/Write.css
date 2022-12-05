@@ -90,6 +90,14 @@
     margin-left: 20px;
 }
 
+.write-recommendation {
+    font-size: larger;
+}
+
+.write-recommendation-choice {
+    margin: 0 5px 0 20px;
+}
+
 .write-submit {
     position: absolute;
     right: 50%;

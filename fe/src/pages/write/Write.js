@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Write.css"
 
 function Write(props) {
     const [fetchedGames, setFetchedGames] = useState([]);
     const [errMessage, setErrMessage] = useState("");
+    const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -13,12 +15,13 @@ function Write(props) {
             gameId: event.target[0].value,
             reviewImage: event.target[1].value,
             reviewTitle: event.target[2].value,
-            reviewContent: event.target[3].value
+            reviewContent: event.target[3].value,
+            recommended: event.target.recommended.value
         }
 
-        console.log(data)
+        // console.log(data)
 
-        fetch('/api/create/checkGame', {
+        fetch('/api/create/processGame', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +31,10 @@ function Write(props) {
             .then(response => response.json())
             .then(data => {
                 if (data["message"]) setErrMessage(data["message"])
-                else setErrMessage("")
+                else {
+                    setErrMessage("")
+                    // navigate("/");
+                }
 
                 console.log(data)
             })
@@ -95,7 +101,7 @@ function Write(props) {
                             <option key={index} value={game.appid}>{game.name}</option>
                         ))}
                     </select>
-                    {errMessage && <p className='write-game-error'>{errMessage}</p>}
+                    {errMessage && <p autoFocus className='write-game-error'>{errMessage}</p>}
                 </div>
 
                 <div className='write-group'>
@@ -111,7 +117,17 @@ function Write(props) {
                 <div className='write-group'>
                     <textarea className='write-description' placeholder='Your story starts here...' required></textarea>
                 </div>
+                
+                <div className='write-group'>
+                    <span className='write-recommendation'>Do you recommend this game?</span>
 
+                    <input type='radio' id='yesChoice' name='recommended' value='yes' className='write-recommendation-choice' />
+                    <label for='yesChoice'>Yes</label>
+
+                    <input type='radio' id='noChoice' name='recommended' value='no' className='write-recommendation-choice' />
+                    <label for='noChoice'>No</label>
+                </div>
+                
                 <div className='write-group last-group'>
                     <button className='write-submit'>Publish</button>
                 </div>
