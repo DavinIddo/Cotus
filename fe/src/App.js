@@ -115,7 +115,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/write" element={
-                            isLogin ? <Write /> : <Navigate to="/register" replace />
+                            isLogin ? <Write userData={userData} /> : <Navigate to="/register" replace />
                         }
                     />
                     <Route path="/login" element={
