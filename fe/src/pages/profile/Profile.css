@@ -67,3 +67,51 @@
     cursor: pointer;
     align-self: center;
 }
+
+.update-error {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    border: 0.5px solid red;
+    border-radius: 15px;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.update-success {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    border: 0.5px solid green;
+    border-radius: 15px;
+    background-color: rgba(0, 128, 0, 0.1);
+    padding: 15px;  
+}
+
+.update-animation {
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
