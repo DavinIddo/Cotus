@@ -4,11 +4,12 @@ const router = express.Router();
 
 // FETCH GAME
 router.get("/fetchAllArticles", async (req, res) => {
-    const articles = await Review.find({});
+    const query = await Review.find({});
+    const articles = query.map(element => element.toJSON())
 
-    // console.log(articles);
+    articles.forEach(article => article.createdAt = article.createdAt.toLocaleString())
 
-    res.status(200).json({ message: "fetching all articles!" });
+    res.status(200).json({ articles: articles, message: "fetching all articles!" });
 });
 
 

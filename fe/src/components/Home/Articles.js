@@ -10,21 +10,18 @@ function Articles() {
         fetch("/api/article/fetchAllArticles")
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                setContent(data["articles"])
             })
             .catch(error => {
                 console.log(error)
             })
-    })
+    }, [])
 
     return (
         <div className='articles'>
-            <Article />
-            <Article />
-            <Article />
-            <Article />
-            <Article />
-            <Article />
+            {content.map((article, index) => (
+                <Article key={index} title={article.title} description={article.description} createdAt={article.createdAt} />
+            ))}
         </div>
     );
 }
