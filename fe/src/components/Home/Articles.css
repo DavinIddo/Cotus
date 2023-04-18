@@ -4,3 +4,14 @@
     flex-wrap: wrap;
     margin: 20px 0 20px 20px;
 }
+
+.article-link {
+    width: 50%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-link:hover {
+    background-color: bisque;
+    border-radius: 5% 5% 1% 1%;
+}
