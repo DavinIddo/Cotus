@@ -138,7 +138,7 @@ function App() {
                             isLogin ? <Profile userData={userData} /> : <Navigate to="/login" replace/>
                         }
                     />
-                    <Route path="/single/:singleId" element={<Single />} />
+                    <Route path="/single/:singleId" element={<Single userData={userData} />} />
                 </Routes>
             </Router>
         </div>

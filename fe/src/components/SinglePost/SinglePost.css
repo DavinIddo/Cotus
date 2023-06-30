@@ -57,3 +57,36 @@
     font-size: 28px;
 
 }
+
+.singlepost-edit {
+    height: 60vh;
+    width: 100%;
+    outline: none;
+    font-size: 20px;
+    margin-top: 10px;
+    resize: vertical;
+}
+
+.singlepost-edit-done {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 1vh;
+    margin-right: 1vh;
+    color: white;
+    background-color: #039487;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.singlepost-edit-cancel {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 1vh;
+    margin-right: 1vh;
+    color: white;
+    background-color: #e76020;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
