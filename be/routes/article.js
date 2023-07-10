@@ -23,5 +23,12 @@ router.put("/updateArticle", async (req, res) => {
     res.status(200).json({ message: "Article has been updated!", newDesc: review.description });
 });
 
+// DELETE AN ARTICLE
+router.delete("/deleteArticle", async (req, res) => {
+    const query = req.body;
+    await Review.deleteOne({ author: query.author, title: query.title });
+    
+    res.status(200).json({ message: "Article has been deleted!" });
+});
 
 module.exports = router;

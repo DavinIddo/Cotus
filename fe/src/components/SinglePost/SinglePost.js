@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./SinglePost.css"
 
 function SinglePost({ userData }) {
     // Allow us to retrieve the data needed in the "State" parameter within Link component //
     const location = useLocation();
     const postDetail = location.state;
-
+    
+    const navigate = useNavigate();
     const [edit, setEdit] = useState(false);
     const [description, setDescription] = useState(postDetail.description);
 
-    function handleSubmit(event) {
+    function handleChange(event) {
         event.preventDefault();
-        console.log("inside handleSubmit!", "\nsending changes to backend!")
+        console.log("inside handleChange!", "\nsending changes to backend!")
 
         const data = {
             author: userData.username,
@@ -38,6 +39,29 @@ function SinglePost({ userData }) {
             })
     }
 
+    function handleDelete() {
+        const data = {
+            author: userData.username,
+            title: postDetail.title
+        }
+
+        fetch('/api/article/deleteArticle', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                navigate("/");
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <div className='singlepost'>
             <div className='singlepost-wrapper'>
@@ -50,7 +74,7 @@ function SinglePost({ userData }) {
                     {(userData) && (postDetail.author === userData.username) &&
                         <div className='singlepost-modification'>
                             <i className="singlepost-icon fa-solid fa-pen-to-square edit" onClick={() => setEdit(true)} />
-                            <i className="singlepost-icon fa-solid fa-trash delete"></i>
+                            <i className="singlepost-icon fa-solid fa-trash delete" onClick={() => handleDelete()} />
                         </div>
                     }
                 </h1>
@@ -64,8 +88,8 @@ function SinglePost({ userData }) {
                         {description}
                     </p>
                     :
-                    <form className='singlepost-form' onSubmit={(e) => handleSubmit(e)}>
-                        <textarea className='singlepost-edit' required>{description}</textarea>
+                    <form className='singlepost-form' onSubmit={(e) => handleChange(e)}>
+                        <textarea className='singlepost-edit' defaultValue={description} required />
                         <button type="submit" className='singlepost-edit-done'>Change</button>
                         <button type="button" className='singlepost-edit-cancel' onClick={() => setEdit(false)}>Cancel</button>
                     </form>
