@@ -23,7 +23,7 @@ function Articles() {
         <div className='articles'>
             {content.map((article, index) => (
                 <Link className='article-link' to={'/single/' + article._id} key={index} state={article}>
-                    <Article title={article.title} description={article.description} createdAt={article.createdAt} />
+                    <Article title={article.title} description={article.description} createdAt={article.createdAt} headerImage={article.gameHeader} />
                 </Link>
             ))}
         </div>
