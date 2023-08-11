@@ -69,14 +69,14 @@ function SinglePost({ userData }) {
                     src='https://images.pexels.com/photos/300857/pexels-photo-300857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'>
                 </img>
                 <h1 className='singlepost-title'>
-                    {postDetail.title}
-
                     {(userData) && (postDetail.author === userData.username) &&
                         <div className='singlepost-modification'>
                             <i className="singlepost-icon fa-solid fa-pen-to-square edit" onClick={() => setEdit(true)} />
                             <i className="singlepost-icon fa-solid fa-trash delete" onClick={() => handleDelete()} />
                         </div>
                     }
+
+                    {postDetail.title}
                 </h1>
                 <div className='singlepost-info'>
                     <span className='singlepost-author'>Author: <b>{postDetail.author}</b> </span>

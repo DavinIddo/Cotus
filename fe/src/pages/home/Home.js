@@ -10,7 +10,7 @@ function Home() {
             <Header />
             <div className='home-content'>
                 <Articles />
-                <Sidebar />
+                {/* <Sidebar /> */}
             </div>
         </div>
     );

@@ -8,11 +8,11 @@ function Article({ title, description, createdAt }) {
                 src='https://images.pexels.com/photos/457881/pexels-photo-457881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'>
             </img>
             <div className='article-content'>
-                <span className='article-title'>{title}</span>
+                <span className='article-date'>Created at {createdAt}</span>
                 <br />
-                <span className='article-date'>{createdAt.toLocaleString()}</span>
+                <span className='article-title'>{title}</span>
+                <p className='article-description'>{description}</p>
             </div>
-            <p className='article-description'>{description}</p>
         </div>
     );
 }
